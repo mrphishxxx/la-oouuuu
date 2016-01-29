@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Boilerplate template for creating joules.",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "twilio": "^2.9.0"
+  },
   "devDependencies": {
     "joule-local": "0.0.3"
   },

@@ -1,7 +1,9 @@
 version: 0.0.1
 language: 'nodejs' # nodejs or python2.7
 variables:
-  - MyVariable # accessible as process.env.MyVariable - value input through the site
+  - accountSid
+  - authToken
+  - from
 methods:
   GET:
     status_codes:
@@ -11,22 +13,9 @@ methods:
       - 404
       - 409
       - 500
-    path_params:
-      - id : required
     query_string_params:
-      - username
-  POST:
-    status_codes:
-      - 201 # Can only have one 2xx status code and it must be first in the list
-      - 400
-      - 401
-      - 404
-      - 409
-      - 500
-    path_params:
-      - id : required
-    query_string_params:
-      - username
+      - body
+      - to
 
 # path params
 # all required must come before optional
