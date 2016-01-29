@@ -3,8 +3,6 @@ language: 'nodejs' # nodejs or python2.7
 variables:
   - TWILIO_ACCOUNT_SID
   - TWILIO_AUTH_TOKEN
-  - accountSid
-  - authToken
   - from
 methods:
   GET:
