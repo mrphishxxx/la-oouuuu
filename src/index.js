@@ -10,7 +10,8 @@
  *    event.{pathParam}, Path parameters as defined in your .joule.yml
  *    event.{queryStringParam}, Query string parameters as defined in your .joule.yml
  */
-var client = require('twilio')(process.env.accountSid, process.env.authToken);
+//var client = require('twilio')(process.env.accountSid, process.env.authToken);
+var client = require('twilio')();
 exports.handler = function(event, context) {
   // take event and reverse all the values
  
