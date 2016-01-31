@@ -1,30 +1,48 @@
 /**
- * This is the boilerplate repository for creating joules.
- * Forking this repository should be the starting point when creating a joule.
+ * This is a Joule which sends an SMS to a given phone number.
+ * Author: Jaisen Mathai <jaisen@jmathai.com>
  */
 
 /*
- * The handler function for all API endpoints.
- * The `event` argument contains all input values.
- *    event.httpMethod, The HTTP method (GET, POST, PUT, etc)
- *    event.{pathParam}, Path parameters as defined in your .joule.yml
- *    event.{queryStringParam}, Query string parameters as defined in your .joule.yml
+ * The joule-node-response module helps format responses properly.
  */
-//var client = require('twilio')(process.env.accountSid, process.env.authToken);
+var Response = require('joule-node-response');
+
+/*
+ * The nodejs library by Twilio for their API.
+ * This Joule exports the account SID and TOKEN into the environment.
+ *
+ * Environment Variables:
+ *  - TWILIO_ACCOUNT_SID, Your Twilio account sid.
+ *  - TWILIO_AUTH_TOKEN, Your Twilio auth token.
+ *  - from, This must be your Twilio phone number.
+ *
+ * DO NOT INCLUDE SECRETS INTO THIS REPOSITORY.
+ */
 var client = require('twilio')();
+
 exports.handler = function(event, context) {
-  // take event and reverse all the values
- 
+  /*
+   *  event.body, The message to be sent in the SMS.
+   *  event.to, The phone number the message should be sent to.
+   */
   client.messages.create({
-      body: event.body,
-      to: event.to,
-      from: process.env.from
+    body: event.body,
+    to: event.to,
+    from: process.env.from
   }, function(err, message) {
-      context.succeed(message.sid);
+    /*
+     * This is the function which is called when the API call to send an SMS completes.
+     * We initialize the Response module so we can return a success or failure response.
+     */
+    var response = new Response();
+    if(err) {
+      response.error400(context, {error: err});
+      return;
+    } else if(message && message.sid) {
+      response.success200(context, {messageSid: message.sid});
+      return;
+    }
+    response.error500(context, {error: 'unknown'});
   });
-  var output = {};
-  /*for(key in event) {
-    output[key] = event[key].split('').reverse().join('');
-  }
-  context.succeed(output);*/
 };
