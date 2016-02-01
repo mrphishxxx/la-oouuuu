@@ -6,7 +6,7 @@
 /*
  * The joule-node-response module helps format responses properly.
  */
-var Response = require('joule-node-response');
+var response = require('joule-node-response');
 
 /*
  * The nodejs library by Twilio for their API.
@@ -35,7 +35,6 @@ exports.handler = function(event, context) {
      * This is the function which is called when the API call to send an SMS completes.
      * We initialize the Response module so we can return a success or failure response.
      */
-    var response = new Response();
     if(err) {
       response.error400(context, {error: err});
       return;
