@@ -1,6 +1,6 @@
 version: 0.0.1
 language: 'nodejs'
-variables:
+environment_variables:
   - TWILIO_ACCOUNT_SID
   - TWILIO_AUTH_TOKEN
   - from
