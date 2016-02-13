@@ -11,7 +11,7 @@ The `.joule.yml` file already includes the 3 environment variables you'll need t
 
 * TWILIO_ACCOUNT_SID, Your Twilio account sid.
 * TWILIO_AUTH_TOKEN, Your Twilio account auth token.
-* from, Your Twilio phone number (1XXXXXXXXXX).
+* FROM, Your Twilio phone number (1XXXXXXXXXX).
 
 ## Call your Joule
 
