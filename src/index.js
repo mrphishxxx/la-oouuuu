@@ -29,7 +29,7 @@ exports.handler = function(event, context) {
   client.messages.create({
     body: event.body,
     to: event.to,
-    from: process.env.from
+    from: process.env.FROM
   }, function(err, message) {
     /*
      * This is the function which is called when the API call to send an SMS completes.
