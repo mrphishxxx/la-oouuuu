@@ -6,7 +6,7 @@
 /*
  * The joule-node-response module helps format responses properly.
  */
-var response = require('joule-node-response');
+var Response = require('joule-node-response');
 
 /*
  * The nodejs library by Twilio for their API.
@@ -22,13 +22,15 @@ var response = require('joule-node-response');
 var client = require('twilio')();
 
 exports.handler = function(event, context) {
+  var response = new Response();
+  response.setContext(context);
   /*
    *  event.body, The message to be sent in the SMS.
    *  event.to, The phone number the message should be sent to.
    */
   client.messages.create({
-    body: event.body,
-    to: event.to,
+    body: event.post['body'],
+    to: event.post['to'],
     from: process.env.FROM
   }, function(err, message) {
     /*
@@ -36,12 +38,14 @@ exports.handler = function(event, context) {
      * We initialize the Response module so we can return a success or failure response.
      */
     if(err) {
-      response.error400(context, {error: err});
+      response.setHttpStatusCode(400);
+      response.send({error: err});
       return;
     } else if(message && message.sid) {
-      response.success200(context, {messageSid: message.sid});
+      response.send({messageSid: message.sid});
       return;
     }
-    response.error500(context, {error: 'unknown'});
+    response.setHttpStatusCode(500);
+    response.send({error: 'unknown'});
   });
 };
