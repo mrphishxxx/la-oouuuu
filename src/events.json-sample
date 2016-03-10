@@ -1,6 +1,6 @@
 {
   "env": {
-    "from": "your_twilio_number",
+    "FROM": "your_twilio_number",
     "TWILIO_ACCOUNT_SID": "your_twilio_account_sid",
     "TWILIO_AUTH_TOKEN": "your_twilio_auth_token"
   },
